@@ -20,6 +20,9 @@ RUN sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /
 
 RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
+RUN mkdir -p /var/lib/php5/sessions && chown www-data:www-data /var/lib/php5/sessions && chmod 777 /var/lib/php5/sessions
+RUN echo "php_value[session.save_path] = /var/lib/php5/sessions" >> /etc/php5/fpm/pool.d/www.conf
+
 # nginx site conf
 ADD ./rockmongo /etc/nginx/sites-available/default
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf

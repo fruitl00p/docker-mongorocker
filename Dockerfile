@@ -21,7 +21,7 @@ RUN apt-get update && apt-get dist-upgrade -y && \
 RUN mkdir -p /var/lib/php5/sessions && \
 	chown www-data:www-data /var/lib/php5/sessions && \
 	chmod 777 /var/lib/php5/sessions && \
-	echo "php_value[session.save_path] = /var/lib/php5/sessions" >> /etc/php5/fpm/pool.d/www.conf &&
+	echo "php_value[session.save_path] = /var/lib/php5/sessions" >> /etc/php5/fpm/pool.d/www.conf && \
 	echo "daemon off;" >> /etc/nginx/nginx.conf && \
 	mkdir /app && \
 	cd /app && \
